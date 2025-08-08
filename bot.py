@@ -5,8 +5,8 @@ from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 # ========================
 # CONFIG
 # ========================
-OWNER_ID = 7911959778  # Sirf ye ID /makeadmin use kar sakti hai
-BOT_TOKEN = os.getenv("BOT_TOKEN")  # Render me Environment Variable set kare
+OWNER_ID = int(os.getenv("OWNER_ID", "7911959778"))  # Apni Telegram Numeric ID (Environment Variable se bhi le sakte ho)
+BOT_TOKEN = os.getenv("BOT_TOKEN")  # Telegram Bot Token (Environment Variable)
 
 if not BOT_TOKEN:
     raise Exception("Please set BOT_TOKEN environment variable before running the bot.")
@@ -41,8 +41,6 @@ async def make_admin(update: Update, context: ContextTypes.DEFAULT_TYPE):
             can_promote_members=True,
             can_change_info=True,
             can_invite_users=True,
-            can_post_messages=True,
-            can_edit_messages=True,
             can_pin_messages=True
         )
         await context.bot.promote_chat_member(chat_id, user_id, rights)
